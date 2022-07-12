@@ -139,9 +139,24 @@ public class StudentFormController {
 
 
 
-        }
 
-        public void SearchStudentOnAction (ActionEvent actionEvent){
+
+        public void SearchStudentOnAction (ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+
+            ResultSet result = CrudUtil.execute("SELECT * FROM Student WHERE id=?",txtSearch.getText());
+            if (result.next()) {
+                txtSName.setText(result.getString(2));
+                txtSemail.setText(result.getString(3));
+                txtContact.setText(result.getString(4));
+                txtAdress.setText(result.getString(5));
+
+                txtSid.setText(txtSearch.getText());
+
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Empty Result").show();
+            }
+
+
         }
 
 
