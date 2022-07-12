@@ -3,6 +3,8 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -17,6 +19,13 @@ public class StudentFormController {
     public JFXTextField txtAdress;
     public JFXButton btnSaveStudent;
     public JFXButton btnNewStudent;
+    public TableView<Student> tblviewStudent;
+    public TableColumn colId;
+    public TableColumn colName;
+    public TableColumn colemail;
+    public TableColumn colcontact;
+    public TableColumn colAddress;
+    public TableColumn colnic;
 
     public void EnterKeyRelease(KeyEvent keyEvent) {
     }
