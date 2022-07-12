@@ -85,7 +85,7 @@ public class StudentFormController {
 
 
             try {
-                if (CrudUtil.execute("INSERT INTO Customer VALUES (?,?,?,?,?,?)",student.getId(),student.getName(),student.getEmail(),student.getContact(),student.getAddress(),student.getNic())){
+                if (CrudUtil.execute("INSERT INTO Student VALUES (?,?,?,?,?,?)",student.getId(),student.getName(),student.getEmail(),student.getContact(),student.getAddress(),student.getNic())){
                     new Alert(Alert.AlertType.CONFIRMATION, "Saved!..").show();
                 }
             } catch (ClassNotFoundException | SQLException e) {
@@ -101,10 +101,20 @@ public class StudentFormController {
         public void NewStudentOnAction (ActionEvent actionEvent){
         }
 
-        public void DeleteStudentOnAction (ActionEvent actionEvent){
+        public void DeleteStudentOnAction (ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+
+            if (CrudUtil.execute("DELETE FROM Student WHERE id=?",txtSearch.getText())){
+                new Alert(Alert.AlertType.CONFIRMATION, "Deleted!").show();
+            }else{
+                new Alert(Alert.AlertType.WARNING, "Try Again!").show();
+            }
+
+
         }
 
         public void UpdateStudentOnAction (ActionEvent actionEvent){
+
+        
         }
 
         public void SearchStudentOnAction (ActionEvent actionEvent){
