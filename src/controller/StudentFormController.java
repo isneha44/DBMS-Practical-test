@@ -13,7 +13,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Student;
+import util.CrudUtil;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class StudentFormController {
@@ -62,7 +64,7 @@ public class StudentFormController {
         public void EnterKeyRelease (KeyEvent keyEvent){
         }
 
-        public void SaveStudentrOnAction (ActionEvent actionEvent){
+        public void SaveStudentrOnAction (ActionEvent actionEvent) throws IOException {
 
             Student student= new Student(
                     txtSid.getText(),
@@ -74,7 +76,7 @@ public class StudentFormController {
 
 
             try {
-                if (CrudUtil.execute("INSERT INTO Customer VALUES (?,?,?,?,?)",customer.getId(),customer.getName(),customer.getAddress(),customer.getNic(),customer.getContact())){
+                if (CrudUtil.execute("INSERT INTO Customer VALUES (?,?,?,?,?,?)",student.getId(),student.getName(),student.getEmail(),student.getContact(),student.getAddress(),student.getNic())){
                     new Alert(Alert.AlertType.CONFIRMATION, "Saved!..").show();
                 }
             } catch (ClassNotFoundException | SQLException e) {
@@ -82,9 +84,9 @@ public class StudentFormController {
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
 
-            AdminContext.getChildren().clear();
-            Parent parent = FXMLLoader.load(getClass().getResource("../view/CustomerForm.fxml"));
-            AdminContext.getChildren().add(parent);
+            StudentContext.getChildren().clear();
+            Parent parent = FXMLLoader.load(getClass().getResource("../view/StudentForm.fxml"));
+            StudentContext.getChildren().add(parent);
         }
 
         public void NewStudentOnAction (ActionEvent actionEvent){
