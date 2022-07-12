@@ -20,7 +20,7 @@ INSERT INTO Student VALUES('S00-001','Imalka Gayani','imalka@gmail.com','+947012
                           ('S00-002','Shanika','shanika@gmail.com','+94701234587','Kotte','957471657v'),
                           ('S00-003','Ramesh','ramesh@gmail.com','+94756934567','colombo','956783269v'),
                           ('S00-004','Hasini','hasini@gmail.com','+94775034567','Ratnapura','2000370269v'),
-                          ('S00-005','Suraj','suraj@gmail.com','+94716744567','jaffna','234571269v'),
+                          ('S00-005','Suraj','suraj@gmail.com','+94716744567','jaffna','234571269v');
 
 CREATE TABLE IF NOT EXISTS Teacher(
 	teacher_id VARCHAR(45),
