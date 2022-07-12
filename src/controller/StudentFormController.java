@@ -3,6 +3,9 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -30,6 +33,10 @@ public class StudentFormController {
     public TableColumn colcontact;
     public TableColumn colAddress;
     public TableColumn colnic;
+    public JFXButton btnDeleteStudent;
+    public JFXButton btnUpdateStudent;
+    public JFXButton btnSearchStudent;
+    public JFXTextField txtNic;
 
     public void initialize() {
         btnSaveStudent.setDisable(true);
@@ -56,6 +63,28 @@ public class StudentFormController {
         }
 
         public void SaveStudentrOnAction (ActionEvent actionEvent){
+
+            Student student= new Student(
+                    txtSid.getText(),
+                    txtSName.getText(),
+                    txtSemail.getText(),
+                    txtContact.getText(),
+                    txtAdress.getText(),
+                    txtNic.getText());
+
+
+            try {
+                if (CrudUtil.execute("INSERT INTO Customer VALUES (?,?,?,?,?)",customer.getId(),customer.getName(),customer.getAddress(),customer.getNic(),customer.getContact())){
+                    new Alert(Alert.AlertType.CONFIRMATION, "Saved!..").show();
+                }
+            } catch (ClassNotFoundException | SQLException e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
+
+            AdminContext.getChildren().clear();
+            Parent parent = FXMLLoader.load(getClass().getResource("../view/CustomerForm.fxml"));
+            AdminContext.getChildren().add(parent);
         }
 
         public void NewStudentOnAction (ActionEvent actionEvent){
