@@ -2,6 +2,8 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +18,7 @@ import model.Student;
 import util.CrudUtil;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class StudentFormController {
@@ -44,7 +47,13 @@ public class StudentFormController {
         btnSaveStudent.setDisable(true);
 
 
+        try {
             loadAllStudents();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         colId.setCellValueFactory(new PropertyValueFactory("id"));
         colName.setCellValueFactory(new PropertyValueFactory("name"));
@@ -102,7 +111,27 @@ public class StudentFormController {
         }
 
 
-    private void loadAllStudents() {
+    private void loadAllStudents() throws SQLException, ClassNotFoundException {
+
+        ResultSet result = CrudUtil.execute("SELECT * FROM Customer");
+        ObservableList<Student> obList = FXCollections.observableArrayList();
+
+        while (result.next()){
+            obList.add(
+                    new Student(
+                            result.getString("id"),
+                            result.getString("name"),
+                            result.getString("email"),
+                            result.getString("contact"),
+                            result.getString("addres"),
+                            result.getString("nic")
+
+                    )
+            );
+        }
+        tblviewStudent.setItems(obList);
+
     }
-}
+    }
+
 
