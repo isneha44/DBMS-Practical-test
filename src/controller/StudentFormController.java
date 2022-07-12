@@ -114,7 +114,7 @@ public class StudentFormController {
 
         public void UpdateStudentOnAction (ActionEvent actionEvent){
 
-        
+
         }
 
         public void SearchStudentOnAction (ActionEvent actionEvent){
@@ -123,7 +123,7 @@ public class StudentFormController {
 
     private void loadAllStudents() throws SQLException, ClassNotFoundException {
 
-        ResultSet result = CrudUtil.execute("SELECT * FROM Customer");
+        ResultSet result = CrudUtil.execute("SELECT * FROM Student");
         ObservableList<Student> obList = FXCollections.observableArrayList();
 
         while (result.next()){
