@@ -112,7 +112,31 @@ public class StudentFormController {
 
         }
 
-        public void UpdateStudentOnAction (ActionEvent actionEvent){
+        public void UpdateStudentOnAction (ActionEvent actionEvent) throws IOException {
+        Student c = new Student(
+                    txtSid.getText(),txtSName.getText(), txtSemail.getText(),txtContact.getText(),txtAdress.getText(),
+                    txtNic.getText());
+
+            try{
+                boolean isUpdated = CrudUtil.execute("UPDATE Student SET id=?   name=?,email=?,contact=?,address=?,nic=? WHERE id=?",c.getName(),c.getAddress(),c.getNic(),c.getContact(),c.getId());
+                if (isUpdated){
+                    new Alert(Alert.AlertType.CONFIRMATION, "Updated!").show();
+                }else{
+                    new Alert(Alert.AlertType.WARNING, "Try Again!").show();
+                }
+
+
+            }catch (SQLException | ClassNotFoundException e){
+
+            }
+
+            StudentContext.getChildren().clear();
+            Parent parent = FXMLLoader.load(getClass().getResource("../view/StudentForm.fxml"));
+            StudentContext.getChildren().add(parent);
+
+        }
+
+
 
 
         }
