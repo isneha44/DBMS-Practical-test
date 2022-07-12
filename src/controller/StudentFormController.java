@@ -34,19 +34,22 @@ public class StudentFormController {
     public void initialize() {
         btnSaveStudent.setDisable(true);
 
-        try {
+
             loadAllStudents();
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
 
         colId.setCellValueFactory(new PropertyValueFactory("id"));
         colName.setCellValueFactory(new PropertyValueFactory("name"));
+        colAddress.setCellValueFactory(new PropertyValueFactory("email"));
+        colcontact.setCellValueFactory(new PropertyValueFactory("contact"));
         colAddress.setCellValueFactory(new PropertyValueFactory("address"));
-        colNic.setCellValueFactory(new PropertyValueFactory("nic"));
-        colContact.setCellValueFactory(new PropertyValueFactory("contact"));
+        colnic.setCellValueFactory(new PropertyValueFactory("nic"));
 
-    }
+
+        }
+
+
+
+
 
 
         public void EnterKeyRelease (KeyEvent keyEvent){
